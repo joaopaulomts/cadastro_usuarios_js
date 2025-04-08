@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Endereços - Sistema de Clientes</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Endereços</h1>
+      <nav>
+        <a href="clientes.html">Clientes</a>
+        <a href="enderecos.html">Endereços</a>
+        <button id="logoutBtn">Sair</button>
+      </nav>
+    </header>
+
+    <main>
+      <section class="enderecos-list">
+        <h2>Lista de Endereços</h2>
+        <div id="clienteInfo"></div>
+        <table id="enderecosTable">
+          <thead>
+            <tr>
+              <th>CEP</th>
+              <th>Rua</th>
+              <th>Bairro</th>
+              <th>Cidade</th>
+              <th>Estado</th>
+              <th>País</th>
+              <th>Principal</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </section>
+
+      <section class="enderecos-form">
+        <h2>Cadastrar/Editar Endereço</h2>
+        <form id="enderecoForm">
+          <input type="hidden" id="enderecoId" />
+          <input type="hidden" id="clienteId" />
+          <div class="form-group">
+            <label for="cep">CEP:</label>
+            <input type="text" id="cep" required />
+          </div>
+          <div class="form-group">
+            <label for="rua">Rua:</label>
+            <input type="text" id="rua" required />
+          </div>
+          <div class="form-group">
+            <label for="bairro">Bairro:</label>
+            <input type="text" id="bairro" required />
+          </div>
+          <div class="form-group">
+            <label for="cidade">Cidade:</label>
+            <input type="text" id="cidade" required />
+          </div>
+          <div class="form-group">
+            <label for="estado">Estado:</label>
+            <input type="text" id="estado" required />
+          </div>
+          <div class="form-group">
+            <label for="pais">País:</label>
+            <input type="text" id="pais" required />
+          </div>
+          <div class="form-group">
+            <label for="principal">Endereço Principal:</label>
+            <input type="checkbox" id="principal" />
+          </div>
+          <button type="submit">Salvar</button>
+          <button type="button" id="cancelBtn">Cancelar</button>
+        </form>
+      </section>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/alasql@latest/dist/alasql.min.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/enderecos.js"></script>
+  </body>
+</html>
