@@ -11,15 +11,14 @@
       <h1>Endereços</h1>
       <nav>
         <a href="clientes.html">Clientes</a>
-        <a href="enderecos.html">Endereços</a>
         <button id="logoutBtn">Sair</button>
       </nav>
     </header>
 
     <main>
       <section class="enderecos-list">
-        <h2>Lista de Endereços</h2>
         <div id="clienteInfo"></div>
+        <h2>Lista de Endereços</h2>
         <table id="enderecosTable">
           <thead>
             <tr>
@@ -44,7 +43,7 @@
           <input type="hidden" id="clienteId" />
           <div class="form-group">
             <label for="cep">CEP:</label>
-            <input type="text" id="cep" required />
+            <input type="text" id="cep" placeholder="00000-000" required />
           </div>
           <div class="form-group">
             <label for="rua">Rua:</label>
@@ -64,20 +63,25 @@
           </div>
           <div class="form-group">
             <label for="pais">País:</label>
-            <input type="text" id="pais" required />
+            <input type="text" id="pais" value="Brasil" required />
           </div>
           <div class="form-group">
-            <label for="principal">Endereço Principal:</label>
-            <input type="checkbox" id="principal" />
+            <label for="principal">
+              <input type="checkbox" id="principal" />
+              Endereço Principal
+            </label>
           </div>
-          <button type="submit">Salvar</button>
-          <button type="button" id="cancelBtn">Cancelar</button>
+          <div class="form-actions">
+            <button type="submit">Salvar</button>
+            <button type="button" id="cancelBtn">Cancelar</button>
+          </div>
         </form>
       </section>
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/alasql@latest/dist/alasql.min.js"></script>
     <script src="js/auth.js"></script>
+    <script src="js/app.js"></script>
     <script src="js/enderecos.js"></script>
   </body>
 </html>

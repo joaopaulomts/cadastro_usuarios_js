@@ -3,62 +3,165 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Login - Sistema de Cliente</title>
+    <title>Login - Sistema de Clientes</title>
     <link rel="stylesheet" href="css/style.css" />
+    <style>
+      /* Estilos adicionais para melhorar a experiência */
+      .login-container {
+        max-width: 400px;
+        margin: 50px auto;
+        padding: 30px;
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+      }
+
+      .form-actions {
+        display: flex;
+        gap: 10px;
+        margin-top: 20px;
+      }
+
+      button {
+        flex: 1;
+        padding: 12px;
+      }
+
+      #registerBtn {
+        background: #2ecc71;
+      }
+
+      #registerBtn:hover {
+        background: #27ae60;
+      }
+
+      #settingsBtn {
+        background: #3498db;
+      }
+
+      #settingsBtn:hover {
+        background: #2980b9;
+      }
+    </style>
   </head>
   <body>
     <div class="login-container">
-      <h1>Login</h1>
+      <h1 style="text-align: center; color: #2c3e50; margin-bottom: 30px">
+        Sistema de Clientes
+      </h1>
       <form id="loginForm">
         <div class="form-group">
           <label for="username">Usuário:</label>
-          <input type="text" id="username" required />
+          <input
+            type="text"
+            id="username"
+            required
+            class="form-input"
+            placeholder="Digite seu usuário"
+          />
         </div>
         <div class="form-group">
           <label for="password">Senha:</label>
-          <input type="password" id="password" required />
+          <input
+            type="password"
+            id="password"
+            required
+            class="form-input"
+            placeholder="Digite sua senha"
+          />
         </div>
-        <button type="submit">Entrar</button>
-        <button type="button" id="registerBtn">Cadastrar</button>
-        <button type="button" id="settingsBtn">Configurações</button>
+        <div class="form-actions">
+          <button type="submit" id="loginBtn" style="background: #3498db">
+            Entrar
+          </button>
+          <button type="button" id="registerBtn">Cadastrar</button>
+          <button type="button" id="settingsBtn">Configurações</button>
+        </div>
       </form>
     </div>
 
+    <!-- Modal de Cadastro -->
     <div id="registerModal" class="modal">
       <div class="modal-content">
         <span class="close">&times;</span>
-        <h2>Cadastrar Novo Usuário</h2>
+        <h2 style="margin-top: 0">Cadastrar Novo Usuário</h2>
         <form id="registerForm">
           <div class="form-group">
             <label for="newUsername">Usuário:</label>
-            <input type="text" id="newUsername" required />
+            <input type="text" id="newUsername" required class="form-input" />
           </div>
           <div class="form-group">
             <label for="newPassword">Senha:</label>
-            <input type="password" id="newPassword" required />
+            <input
+              type="password"
+              id="newPassword"
+              required
+              class="form-input"
+            />
           </div>
-          <button type="submit">Cadastrar</button>
+          <div class="form-actions">
+            <button type="submit" style="flex: none; width: 100%">
+              Cadastrar
+            </button>
+          </div>
         </form>
       </div>
     </div>
 
+    <!-- Modal de Configurações -->
     <div id="settingsModal" class="modal">
       <div class="modal-content">
         <span class="close">&times;</span>
-        <h2>Configurações</h2>
+        <h2 style="margin-top: 0">Configurações do Sistema</h2>
         <div class="form-group">
-          <label for="dbFile">Importar Banco de Dados</label>
-          <input type="file" id="dbFile" accept=".json" />
-          <button id="importarBtn">Importar</button>
+          <label for="dbFile">Importar Banco de Dados (JSON):</label>
+          <input
+            type="file"
+            id="dbFile"
+            accept=".json"
+            style="margin-top: 5px"
+          />
         </div>
-        <div class="form-group">
-          <button id="exportBtn">Exportar Banco de Dados</button>
+        <div class="form-actions" style="margin-top: 20px">
+          <button type="button" id="importBtn" style="background: #2ecc71">
+            Importar
+          </button>
+          <button type="button" id="exportBtn" style="background: #3498db">
+            Exportar
+          </button>
         </div>
       </div>
     </div>
 
+    <!-- Scripts na ORDEM CORRETA -->
     <script src="https://cdn.jsdelivr.net/npm/alasql@latest/dist/alasql.min.js"></script>
-    <script src="js/auth.js"></script>
     <script src="js/app.js"></script>
+    <script src="js/auth.js"></script>
+
+    <script>
+      // Feedback visual para o usuário
+      document.addEventListener("DOMContentLoaded", function () {
+        // Adiciona classe quando inputs são focados
+        const inputs = document.querySelectorAll("input");
+        inputs.forEach((input) => {
+          input.addEventListener("focus", function () {
+            this.classList.add("focused");
+          });
+          input.addEventListener("blur", function () {
+            this.classList.remove("focused");
+          });
+        });
+
+        // Verifica se há usuários cadastrados
+        setTimeout(() => {
+          if (window.db) {
+            const users = db.exec("SELECT * FROM usuarios");
+            if (users.length === 0) {
+              document.getElementById("registerBtn").style.display = "block";
+            }
+          }
+        }, 500);
+      });
+    </script>
   </body>
 </html>
