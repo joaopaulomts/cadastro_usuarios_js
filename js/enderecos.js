@@ -10,10 +10,20 @@ document.addEventListener("DOMContentLoaded", function () {
     return;
   }
 
+  // Aguarda o banco estar pronto
+  if (window.db) {
+    initEnderecos(clienteId);
+  } else {
+    document.addEventListener("db-ready", () => initEnderecos(clienteId));
+  }
+});
+
+function initEnderecos(clienteId) {
   document.getElementById("clienteId").value = clienteId;
   loadClienteInfo(clienteId);
   loadEnderecos(clienteId);
 
+  // Configura eventos
   document.getElementById("logoutBtn").addEventListener("click", function () {
     localStorage.removeItem("loggedIn");
     window.location.href = "index.html";
@@ -28,12 +38,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
   document.getElementById("cancelBtn").addEventListener("click", resetForm);
 
+  // Busca CEP automática
   document.getElementById("cep").addEventListener("blur", function () {
     if (this.value.length === 8) {
       buscarCEP(this.value);
     }
   });
-});
+}
 
 function loadClienteInfo(clienteId) {
   try {
